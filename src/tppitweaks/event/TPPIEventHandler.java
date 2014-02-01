@@ -22,6 +22,7 @@ import tppitweaks.client.gui.GuiHelper;
 import tppitweaks.client.gui.UpdateGui;
 import tppitweaks.config.ConfigurationHandler;
 import tppitweaks.item.ModItems;
+import tppitweaks.lib.Reference;
 import tppitweaks.recipetweaks.RecipeTweaks;
 import tppitweaks.recipetweaks.modTweaks.DATweaks;
 
@@ -121,7 +122,7 @@ public class TPPIEventHandler
 				{
 					// Do nothing
 				}
-				else if (s.equals("Test Pack Please Ignore"))
+				else if (s.equals("Test Pack Please Ignore " + Reference.PACK_VERSION))
 				{
 					// Do nothing
 				}
@@ -137,7 +138,7 @@ public class TPPIEventHandler
 					newList.add(s);
 			}
 
-			newList.add("Test Pack Please Ignore");
+			newList.add("Test Pack Please Ignore " + Reference.PACK_VERSION);
 
 			f.set(FMLCommonHandler.instance(), ImmutableList.copyOf(newList));
 		}
