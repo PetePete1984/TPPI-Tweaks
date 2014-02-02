@@ -36,9 +36,9 @@ It will always automatically contain the most up-to-date information
 on the pack, so check it often!~
 ~
 Should you want a new copy, you can craft one with an iron ingot and three paper,
-but this is not necessary to recieve new info!.
+but this is not necessary to receive new info!
 ~~~
-Another feature of TPPI Tweaks is the in-game commands it adds.~
+Another feature of TPPI Tweaks are the in-game commands it adds.~
 ~
 The changelog can be found by typing /tppi changelog, which will of course always 
 be up to date, no need to ever get a new copy.~
@@ -46,7 +46,7 @@ be up to date, no need to ever get a new copy.~
 Also, we're working on a project to add in-game documentation for all 
 the mods in the pack, to be accessed via commands.~
 ~~~
-Type /tppi guide to recipe an all-around guide to the documentation system, 
+Type /tppi guide to receive an all-around guide to the documentation system, 
 the easiest way to obtain info on any mod you wish.~
 ~~~
 Type /tppi mods <modname> to get an individual book for a mod, or to get
