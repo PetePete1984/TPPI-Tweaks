@@ -12,12 +12,14 @@ import tppitweaks.recipetweaks.modTweaks.AM2Tweaks;
 import tppitweaks.recipetweaks.modTweaks.BigReactorsTweaks;
 import tppitweaks.recipetweaks.modTweaks.DATweaks;
 import tppitweaks.recipetweaks.modTweaks.DCTweaks;
+import tppitweaks.recipetweaks.modTweaks.DCandIC2Tweaks;
 import tppitweaks.recipetweaks.modTweaks.EnderStorageTweaks;
 import tppitweaks.recipetweaks.modTweaks.ExUTweaks;
 import tppitweaks.recipetweaks.modTweaks.GregtechTweaks;
 import tppitweaks.recipetweaks.modTweaks.IC2Tweaks;
 import tppitweaks.recipetweaks.modTweaks.MPSATweaks;
 import tppitweaks.recipetweaks.modTweaks.MagicropsTweaks;
+import tppitweaks.recipetweaks.modTweaks.MekanismTweaks;
 import tppitweaks.recipetweaks.modTweaks.OpenBlocksTweaks;
 import tppitweaks.recipetweaks.modTweaks.SFMTweaks;
 import tppitweaks.recipetweaks.modTweaks.TweakerBase;
@@ -25,9 +27,9 @@ import cpw.mods.fml.common.Loader;
 
 public class RecipeTweaks
 {
-	
-	private static boolean recipesInitialized;
-	
+
+	public static boolean recipesInitialized;
+
 	private static boolean okayToTweakIC2;
 	private static boolean okayToTweakGT;
 	private static boolean okayToTweakEnderStorage;
@@ -40,41 +42,42 @@ public class RecipeTweaks
 	private static boolean okayToTweakDartCraft;
 	private static boolean okayToTweakExU;
 	private static boolean okayToTweakMPSA;
+	private static boolean okayToTweakMekanism;
 
-	public static void doPostInitRecipeTweaks() {
-		
+	public static void doPostInitRecipeTweaks()
+	{
+
 		recipesInitialized = false;
-		
+
 		checkWhatWeCanTweak();
 		initRemovableRecipesMap();
-		
+
 		if (okayToTweakGT)
 			GregtechTweaks.doStuff();
-		
+
 		if (okayToTweakExU)
 			ExUTweaks.fixRecipes();
-		
+
 		doOreDictTweaks();
 
 		if (okayToTweakIC2)
 			IC2Tweaks.registerOres();
-		
+
 		if (okayToTweakMagicalCrops)
 			MagicropsTweaks.registerOres();
-		
+
 		removeSomeRecipes();
 		addRevisedRecipes();
-		
+
 	}
-	
+
 	public static void doPlayerJoinRecipeTweaks()
 	{
-		if(!recipesInitialized) {
-			if (okayToTweakGT) {
-				GregtechTweaks.addRecipes();
-			}
-			recipesInitialized = true;
+		if (okayToTweakGT)
+		{
+			GregtechTweaks.addRecipes();
 		}
+		recipesInitialized = true;
 	}
 
 	@SuppressWarnings({ "unchecked" })
@@ -103,9 +106,10 @@ public class RecipeTweaks
 		okayToTweakOpenBlocks = Loader.isModLoaded("OpenBlocks") && ConfigurationHandler.eloraamBreakersAndDeployers;
 		okayToTweakAM2 = Loader.isModLoaded("arsmagica2") && ConfigurationHandler.tweakAM2;
 		okayToTweakMagicalCrops = Loader.isModLoaded("magicalcrops") && ConfigurationHandler.registerMagicalCropsOre;
-		okayToTweakDartCraft = Loader.isModLoaded("DartCraft") && Loader.isModLoaded("IC2") && ConfigurationHandler.removeStupidEnergyCrystalRecipe;
+		okayToTweakDartCraft = Loader.isModLoaded("DartCraft") && ConfigurationHandler.removeStupidEnergyCrystalRecipe;
 		okayToTweakExU = Loader.isModLoaded("ExtraUtilities") && ConfigurationHandler.fixExURecipes;
 		okayToTweakMPSA = Loader.isModLoaded("powersuitaddons") && ConfigurationHandler.changeMPSARecipes;
+		okayToTweakMekanism = Loader.isModLoaded("Mekanism") && ConfigurationHandler.harderDisassemblerRecipe;
 	}
 
 	private static void initRemovableRecipesMap()
@@ -139,9 +143,17 @@ public class RecipeTweaks
 		{
 			DCTweaks.init();
 		}
+		if (okayToTweakDartCraft && okayToTweakIC2)
+		{
+			DCandIC2Tweaks.init();
+		}
 		if (okayToTweakMPSA)
 		{
 			MPSATweaks.init();
+		}
+		if (okayToTweakMekanism)
+		{
+			MekanismTweaks.init();
 		}
 	}
 
@@ -161,28 +173,31 @@ public class RecipeTweaks
 
 	private static void addRevisedRecipes()
 	{
-		
+
 		if (okayToTweakEnderStorage)
 			EnderStorageTweaks.addRecipes();
-		
+
 		if (okayToTweakBigReactors)
 			BigReactorsTweaks.addRecipes();
-		
+
 		if (okayToTweakDA)
 			DATweaks.addRecipes();
-		
+
 		if (okayToTweakSFM)
 			SFMTweaks.addRecipes();
-		
+
 		if (okayToTweakOpenBlocks)
 			OpenBlocksTweaks.addRecipes();
-		
+
 		if (okayToTweakAM2)
 			AM2Tweaks.addRecipes();
-		
+
 		if (okayToTweakMPSA)
 			MPSATweaks.addRecipes();
 		
+		if (okayToTweakMekanism)
+			MekanismTweaks.addRecipes();
+
 	}
 
 	/**
